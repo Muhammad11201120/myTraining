@@ -3,6 +3,7 @@ var sound = new Audio();
 sound.src = '../sounds/lose.mp3';
 var sound2 = new Audio();
 sound2.src = '../sounds/win.wav';
+numBox = 6;
 var container = document.querySelector('.container');
 var h1 = document.querySelector('h1');
 var box = document.querySelectorAll('.box');
@@ -14,31 +15,56 @@ var msg = document.getElementById('message');
 var newGame = document.getElementById('newGameBtn');
 var easyMode = document.getElementById('easyBtn');
 var hardMode = document.getElementById('hardBtn');
-pickedColor = colorsArray(6);
+pickedColor = colorsArray(numBox);
+
+// toggling game hard-easy btns
+easyMode.addEventListener('click', function() {
+    easyMode.classList.add('selected');
+    hardMode.classList.remove('selected');
+    numBox = 3;
+    pickedColor = colorsArray(numBox);
+    for (i = 0; i < box.length; i++) {
+        if (pickedColor[i]) {
+            reset();
+        } else {
+            box[i].style.display = 'none';
+        }
+    }
+});
+hardMode.addEventListener('click', function() {
+    hardMode.classList.add('selected');
+    easyMode.classList.remove('selected');
+    numBox = 6;
+    pickedColor = colorsArray(numBox);
+    for (i = 0; i < box.length; i++) {
+        reset();
+        box[i].style.display = 'block';
+    }
+});
 // when clicking the new game or changing colors btn
 newGame.addEventListener('click', function() {
     if (newGame.textContent == 'new game') {
         newGame.textContent = 'new colors';
     }
-    pickedColor = colorsArray(6);
+    pickedColor = colorsArray(numBox);
     reset();
 });
-if (hardMode.hasAttribute('selected')) {
-    for (var i = 0; i < box.length; i++) {
-        reset();
-    }
+
+for (var i = 0; i < box.length; i++) {
+    reset();
+
 }
 // to restart the game or changing colors
 function reset() {
     for (var i = 0; i < box.length; i++) {
         // put the content of display color span to random color from pickedColor array
-        displayColor.textContent = pickedColor[Math.floor(Math.random() * 6)];
+        displayColor.textContent = pickedColor[Math.floor(Math.random() * numBox)];
         // filling all boxes with colors from array colors
         box[i].style.backgroundColor = pickedColor[i];
         //when clicking on one of the boxes
         box[i].addEventListener('click', clicking);
         // reinit the button background color
-        hardMode.style.backgroundColor = '#232323';
+        // hardMode.style.backgroundColor = '#232323';
         // give the h1 origin background color
         h1.style.backgroundColor = 'steelblue';
         // reinint the message span
@@ -57,7 +83,7 @@ function clicking() {
         //changing the header background color
         h1.style.backgroundColor = displayColor.textContent;
         // changeing level button color
-        hardMode.style.backgroundColor = displayColor.textContent;
+        // hardMode.style.backgroundColor = displayColor.textContent;
         // changing the congratolaition message color
         msg.style.color = displayColor.textContent;
         // changing new Colors button text to new Game
