@@ -1,0 +1,15 @@
+.bg-img {
+    background-image: url("../images/image1.jpeg");
+    width: 10%;
+    height: 10%;
+    border: 4px solid black;
+    border-radius: 5px;
+}
+
+.bg-img2 {
+    background-image: url("../images/image2.jpeg");
+    width: 10%;
+    height: 10%;
+    border: 4px solid black;
+    border-radius: 5px;
+}

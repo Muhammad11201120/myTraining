@@ -1,0 +1,28 @@
+body {
+    background: rgb(71, 122, 226);
+}
+
+h1 {
+    text-align: center;
+}
+
+.game {
+    text-align: center;
+    margin: 0 auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 30%;
+}
+
+span {
+    padding: 10px;
+}
+
+select {
+    margin-bottom: 10px;
+}
+
+.container {
+    text-align: center;
+    margin-top: 5%;
+}
